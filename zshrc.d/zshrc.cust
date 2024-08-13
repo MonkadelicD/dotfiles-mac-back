@@ -9,6 +9,14 @@ setopt hist_ignore_all_dups # don't write dups to history
 setopt hist_ignore_space # don't write command to history if the first character is a space
 #setopt share_history # commands are immediately written and imported to each zsh session
 
+# ensure users's bin dirs are in $PATH
+if [[ -d "$HOME"/.local/bin ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+if [[ -d "$HOME"/bin ]]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
 # set my zsh history customizations
 HISTFILE="$HOME"/.zsh_history
 # keep more history
@@ -56,3 +64,7 @@ export VISUAL='vim'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm zsh_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

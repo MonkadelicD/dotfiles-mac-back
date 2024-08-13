@@ -14,7 +14,12 @@ case $OS in
 		fi
 	;;
 	'Darwin')
-		alias uu='brew update && brew upgrade --greedy'
+		if which brew > /dev/null; then
+			alias uu='brew update && brew upgrade --greedy'
+		fi
+		if [[ -x /opt/homebrew/bin/git ]]; then
+			alias git='/opt/homebrew/bin/git'
+		fi
 	;;
 	*) ;;
 esac
