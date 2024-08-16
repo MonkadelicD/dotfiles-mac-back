@@ -52,9 +52,8 @@ fi
 # Change to directory containing dotfiles
 if [ "$script_dir" != "$PWD" ]; then
   cd "$script_dir" || { echo "Failed changing directory to $script_dir"; exit 1; }
+  script_dir="$PWD"
 fi
-
-script_dir="$PWD"
 
 # Create an array of custom zsh config files
 zshrc_configs=("$(ls -1 zshrc.*)")
