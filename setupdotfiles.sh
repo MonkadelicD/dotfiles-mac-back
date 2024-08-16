@@ -54,6 +54,8 @@ if [ "$script_dir" != "$PWD" ]; then
   cd "$script_dir" || { echo "Failed changing directory to $script_dir"; exit 1; }
 fi
 
+script_dir="$PWD"
+
 # Create an array of custom zsh config files
 zshrc_configs=("$(ls -1 zshrc.*)")
 
@@ -86,13 +88,13 @@ fi
 if [ -h "$HOME"/.zshrc.sh ]; then
   unlink "$HOME"/.zshrc.sh
 fi
-ln -sf "$PWD"/zshrc.sh "$HOME"/.zshrc.sh
+ln -sf "$script_dir"/zshrc.sh "$HOME"/.zshrc.sh
 # remove an existing soft link
 if [ -x "$HOME"/.zshrc.d ] && [ ! -h "$HOME"/.zshrc.d ]; then
   cp -f ./zshrc.d/* "$HOME"/.zshrc.d/
 else
   unlink "$HOME"/.zshrc.d
-  ln -sf "$PWD"/zshrc.d "$HOME"/.zshrc.d
+  ln -sf "$script_dir"/zshrc.d "$HOME"/.zshrc.d
 fi
 
 ## END ZSH SETUP
