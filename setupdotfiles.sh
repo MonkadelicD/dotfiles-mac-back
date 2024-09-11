@@ -18,7 +18,6 @@ script_dir=$(dirname "$0")
 # VIM paths
 vimIndentLinePath="$HOME"/.vim/pack/vendor/start/indentLine
 vimTerraformPath="$HOME"/.vim/pack/plugins/start/vim-terraform
-vimPolyglotPath="$HOME"/.vim/pack/plugins/start/vim-polyglot
 vimCocVimPath="$HOME"/.vim/pack/coc/start/coc.nvim
 vimDimColorSchemePath="$HOME"/.vim/pack/plugins/start/vim-dim
 
@@ -177,10 +176,6 @@ fi
 rm -rf "$vimIndentLinePath"
 git clone https://github.com/Yggdroot/indentLine.git "$vimIndentLinePath"
 vim -u NONE -c "helptags  $vimIndentLinePath/doc" -c "q"
-
-# install vim-polyglot
-rm -rf "$vimPolyglotPath"
-git clone --depth 1 https://github.com/sheerun/vim-polyglot "$vimPolyglotPath"
 
 # install coc-nvim
 rm -rf "$vimCocVimPath"
