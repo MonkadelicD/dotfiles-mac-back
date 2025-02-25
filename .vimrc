@@ -1,5 +1,8 @@
 ".vimrc 
 
+"disable modelines
+set nomodeline
+
 "set color scheme
 set background=dark
 colorscheme dim
