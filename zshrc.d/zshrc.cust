@@ -74,3 +74,6 @@ export KUBECONFIG=/Users/darylvoss/Projects/kdc/kubeconfig.yml
 # Add my keys to the ssh agent; passwords are pulled from the keychain.
 # The --apple-load-keychain option is unique to MacOS.
 ssh-add --apple-load-keychain
+
+# Terragrunt environment variables
+export TG_TF_PATH=terraform
