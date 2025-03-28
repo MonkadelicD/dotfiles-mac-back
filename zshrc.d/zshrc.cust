@@ -1,5 +1,7 @@
 ## ~/.zsh_cust: customizations for zsh non-login shells
 
+## BEGIN ZSH
+
 # My setopts for zsh 
 setopt interactivecomments # Allows commends in cli commands like sh, bash, ksh do
 setopt inc_append_history_time # appends commands to history after execution and includes execution time
@@ -8,14 +10,6 @@ setopt hist_find_no_dups # history search skips dups
 setopt hist_ignore_all_dups # don't write dups to history
 setopt hist_ignore_space # don't write command to history if the first character is a space
 #setopt share_history # commands are immediately written and imported to each zsh session
-
-# ensure users's bin dirs are in $PATH
-if [[ -d "$HOME"/.local/bin ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
-fi
-if [[ -d "$HOME"/bin ]]; then
-  export PATH="$HOME/bin:$PATH"
-fi
 
 # set my zsh history customizations
 HISTFILE="$HOME"/.zsh_history
@@ -31,6 +25,19 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+# ensure users's bin dirs are in $PATH
+if [[ -d "$HOME"/.local/bin ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+if [[ -d "$HOME"/bin ]]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
+# use my aliases
+if [ -f ~/.zsh_aliases ]; then
+    . ~/.zsh_aliases
+fi
+
 # set a variable with the parent process of the session
 sessParent=$(ps -o comm= -p $PPID)
 
@@ -44,10 +51,30 @@ else
   PROMPT="%{%F{7}%}[%{%F{2}%}%n%{%F{15}%}@%{%F{4}%}%m%{%F{7}%}] %{%F{10}%}%~ "$'\n'"%{%F{2}%}$%{%f%}> "
 fi
 
-# use my aliases
-if [ -f ~/.zsh_aliases ]; then
-    . ~/.zsh_aliases
-fi
+## END ZSH
+
+## BEGIN KUBERNETES
+
+export KUBECONFIG=~/Projects/k8s/kdc/kdc.yaml
+
+# enabled kubectl tab-completion
+source <(kubectl completion zsh)
+
+## END KUBERNETES
+
+# Add my keys to the ssh agent; passwords are pulled from the keychain.
+# The --apple-load-keychain option is unique to MacOS.
+ssh-add --apple-load-keychain
+
+# Terragrunt environment variables
+export TG_TF_PATH=terraform
+
+## BEGIN AWS 
+
+# AWS environment variables
+export AWS_CONFIG_FILE=~/.aws/config
+export AWS_SHARED_CREDENTIALS_FILE=~/.aws/credentials
+export AWS_PROFILE=default
 
 # enable command completion for aws cli if present
 if [ -f /opt/homebrew/bin/aws_completer ]; then
@@ -55,6 +82,10 @@ if [ -f /opt/homebrew/bin/aws_completer ]; then
   autoload -Uz compinit && compinit
   complete -C '/opt/homebrew/bin/aws_completer' aws
 fi
+
+## END AWS
+
+## BEGIN MISC
 
 # set EDITOR to vim
 export EDITOR='vim'
@@ -69,8 +100,4 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-export KUBECONFIG=/Users/darylvoss/Projects/kdc/kubeconfig.yml
-
-# Add my keys to the ssh agent; passwords are pulled from the keychain.
-# The --apple-load-keychain option is unique to MacOS.
-ssh-add --apple-load-keychain
+## END MISC
