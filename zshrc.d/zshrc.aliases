@@ -46,3 +46,6 @@ alias python='python3'
 
 # colorized tree
 alias tree='tree -C'
+
+# git aliases
+alias gitup='git remote update --prune; git pull'

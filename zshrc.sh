@@ -14,7 +14,3 @@ if [ -x ~/.zshrc.d ]; then
   done
   unset zshrc_file
 fi
-
-export AWS_CONFIG_FILE=~/.aws/config
-export AWS_PROFILE=terraform-1176
-export AWS_SHARED_CREDENTIALS_FILE=~/.aws/credentials
