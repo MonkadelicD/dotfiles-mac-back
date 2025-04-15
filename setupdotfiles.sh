@@ -18,7 +18,6 @@ script_dir=$(dirname "$0")
 # VIM paths
 vimIndentLinePath="$HOME"/.vim/pack/vendor/start/indentLine
 vimTerraformPath="$HOME"/.vim/pack/plugins/start/vim-terraform
-#vimCocVimPath="$HOME"/.vim/pack/coc/start/coc.nvim
 vimDimColorSchemePath="$HOME"/.vim/pack/plugins/start/vim-dim
 
 ## END VARIABLES
@@ -176,16 +175,6 @@ fi
 rm -rf "$vimIndentLinePath"
 git clone https://github.com/Yggdroot/indentLine.git "$vimIndentLinePath"
 vim -u NONE -c "helptags  $vimIndentLinePath/doc" -c "q"
-
-## install coc-nvim
-#rm -rf "$vimCocVimPath"
-#git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1 "$vimCocVimPath"
-#vim -c "helptags $vimCocVimPath/doc/ | q"
-## copy coc-settings.json
-#cp -f .vim/coc-settings.json "$HOME"/.vim/
-#cp -f .coc.vimrc "$HOME"/
-## install coc language servers
-#vim -c "CocInstall coc-markdownlint coc-tsserver coc-json coc-html coc-css coc-pyright coc-yaml | q"
 
 # copy vimrc file if present
 if [ -f .vimrc ]; then
