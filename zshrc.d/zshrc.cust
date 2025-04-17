@@ -20,6 +20,11 @@ SAVEHIST="$HISTSIZE"
 # set time format for extended_history
 export HISTTIMEFORMAT="%C%y%m%d%H%M%S: "
 
+# enable bash completion compatibility
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
+
 # enable color prompt
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -78,8 +83,6 @@ export AWS_PROFILE=default
 
 # enable command completion for aws cli if present
 if [ -f /opt/homebrew/bin/aws_completer ]; then
-  autoload bashcompinit && bashcompinit
-  autoload -Uz compinit && compinit
   complete -C '/opt/homebrew/bin/aws_completer' aws
 fi
 
